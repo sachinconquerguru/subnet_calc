@@ -7,19 +7,9 @@ def main_fun():
     subnet=int(subnet_add.get())
     sub_net_str=''.join(str("1"*subnet+"0"*(32-subnet))) 
     asd = re.findall('........',sub_net_str)
-    final_subnet_ip_binary = ".".join(asd)
-    subnet_lst = final_subnet_ip_binary.split(".")
-    count = 0
     jkl = []
-    for i in subnet_lst:
-        b_num = list(subnet_lst[count])
-        value = 0
-        for i in range(len(b_num)):            
-            digit = b_num.pop()
-            if digit == '1':       
-                value = value + pow(2, i)
-        count+=1
-        jkl.append(value)
+    for i in asd:
+        jkl.append(int(i,2))
     subnet_mask_ipv4 =".".join(map(str, jkl))
     network_lst = []
     new = list(ipr.split("."))
@@ -28,19 +18,9 @@ def main_fun():
     network_address = ".".join(map(str, network_lst))
     str_inverted_subnet=''.join(str("0"*subnet+"1"*(32-subnet)))
     inverted= re.findall('........',str_inverted_subnet)
-    finalstr_inverted_subnet = ".".join(inverted)
-    subnetinvert_lst = finalstr_inverted_subnet.split(".")
-    count3 = 0
     inver_lst = []
-    for i in subnet_lst:
-        b_num = list(subnetinvert_lst[count3])
-        value = 0
-        for i in range(len(b_num)):           
-            digit = b_num.pop()
-            if digit == '1':      
-                value = value + pow(2, i)
-        count3+=1
-        inver_lst.append(value)
+    for i in inverted:
+        inver_lst.append(int(i,2))
     brodcast_lst = []
     new1 = list(network_address.split("."))
     for i in range(len(new)):
