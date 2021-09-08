@@ -12,9 +12,9 @@ def main_fun():
         jkl.append(int(i,2))
     subnet_mask_ipv4 =".".join(map(str, jkl))
     network_lst = []
-    new = list(ipr.split("."))
-    for i in range(len(new)):
-        network_lst.append(int(new[i]) & jkl[i])
+    ip_split = list(ipr.split("."))
+    for i in range(len(ip_split)):
+        network_lst.append(int(ip_split[i]) & jkl[i])
     network_address = ".".join(map(str, network_lst))
     str_inverted_subnet=''.join(str("0"*subnet+"1"*(32-subnet)))
     inverted= re.findall('........',str_inverted_subnet)
@@ -22,15 +22,13 @@ def main_fun():
     for i in inverted:
         inver_lst.append(int(i,2))
     brodcast_lst = []
-    new1 = list(network_address.split("."))
-    for i in range(len(new)):
-        brodcast_lst.append(int(new1[i]) | inver_lst[i])
+    for i in range(len(ip_split)):
+        brodcast_lst.append(int(network_lst[i]) | inver_lst[i])
     brodacast_address = ".".join(map(str, brodcast_lst))
     No_of_available_IP_address= pow(2, 32-subnet)
     useable_ip_address = No_of_available_IP_address - 2
-    network_lst_for_range = list(network_address.split("."))
-    network_lst_for_range[3] = int(network_lst_for_range[3]) + 1
-    start_range = ".".join(map(str, network_lst_for_range))
+    network_lst[3] = int(network_lst[3]) + 1
+    start_range = ".".join(map(str, network_lst))
     brodcast_lst[3] = int(brodcast_lst[3]) - 1
     end_range = ".".join(map(str, brodcast_lst))
     range1 = start_range + " - " + end_range
